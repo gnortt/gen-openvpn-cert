@@ -38,4 +38,8 @@ openssl ca \
     -in "$OUT_DIR/$CLIENT_CN.csr" \
     -out "$OUT_DIR/$CLIENT_CN.crt" \
 
-chmod 0600 "$OUT_DIR/$CLIENT_CN.key"
+openvpn \
+    --tls-crypt-v2 "$IN_DIR"/server-tlsv2.key \
+    --genkey tls-crypt-v2-client "$OUT_DIR/$CLIENT_CN"-tlsv2.key
+
+chmod 0600 "$OUT_DIR"/*.key

@@ -57,8 +57,10 @@ openssl ca \
     -in "$OUT_DIR/$SERVER_CN.csr" \
     -out "$OUT_DIR/$SERVER_CN.crt"
 
-chmod 0600 "$OUT_DIR"/ca.key
-chmod 0600 "$OUT_DIR/$SERVER_CN.key"
+openssl dhparam \
+    -out "$OUT_DIR/dh$KEY_SIZE.pem" $KEY_SIZE
 
-openssl dhparam -out "$OUT_DIR/dh$KEY_SIZE.pem" $KEY_SIZE
-openvpn --genkey secret "$OUT_DIR"/ta.key
+openvpn --genkey tls-crypt "$OUT_DIR"/ta.key
+openvpn --genkey tls-crypt-v2-server "$OUT_DIR"/server-tlsv2.key
+
+chmod 0600 "$OUT_DIR"/*.key
