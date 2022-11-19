@@ -2,7 +2,7 @@
 
 Self-signed OpenVPN TLS certificate generator script. Quickly generate a certificate authority, server, and client keys and certificates.
 
-There are two sets of scripts, `gen-[server|client]-cert.sh` and `gen-[server|client]-ecc-cert.sh`. The former generates `RSA` keys, the latter `secp521r1` ECC keys. Both also generate Diffie-Hellman parameters (`dh[keysize].pem`), OpenVPN v1 tls-crypt (`ta.key`) and tls-crypt-v2 (`[server|client]-tlsv2.key`) symmetric keys.
+Generated are `secp384r1` ECC keys, Diffie-Hellman parameters (`dh[dh keysize].pem`), OpenVPN v1 tls-crypt (`ta.key`) and tls-crypt-v2 (`[server|client]-tlsv2.key`) symmetric keys.
 
 # Requirements
 
@@ -12,8 +12,6 @@ Required dependencies:
 - openssl
 
 # Usage
-
-Decide whether you want ECC or RSA keys. Use `gen-*-cert.sh` for RSA, and `gen-*-ecc-cert.sh` for ECC keys.
 
 `gen-server-cert.sh` needs a number of positional arguments:
 

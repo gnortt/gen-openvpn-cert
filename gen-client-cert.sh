@@ -25,7 +25,7 @@ openssl req \
     -batch \
     -nodes \
     -new \
-    -newkey rsa:$KEY_SIZE \
+    -newkey ec:<(openssl ecparam -name secp384r1) \
     -keyout "$OUT_DIR/$CLIENT_CN.key" \
     -out "$OUT_DIR/$CLIENT_CN.csr" \
 
