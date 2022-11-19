@@ -21,7 +21,8 @@ export KEY_CN="$CLIENT_CN"
 openssl req \
     -config "openssl.cnf" \
     -batch \
-    -nodes \
+    -noenc \
+    -sha384 \
     -new \
     -newkey ec:<(openssl ecparam -name secp384r1) \
     -keyout "$OUT_DIR/$CLIENT_CN.key" \
@@ -31,7 +32,6 @@ openssl ca \
     -config "openssl.cnf" \
     -batch \
     -notext \
-    -md sha256 \
     -days $DAYS \
     -in "$OUT_DIR/$CLIENT_CN.csr" \
     -out "$OUT_DIR/$CLIENT_CN.crt" \
