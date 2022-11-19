@@ -16,7 +16,7 @@ Required dependencies:
 `gen-server-cert.sh` needs a number of positional arguments:
 
 ```
-    Usage: ./gen-server-cert.sh [output directory] [ca cn] [server cn] [keysize] [days]
+    Usage: ./gen-server-cert.sh [output directory] [ca cn] [server cn] [dh keysize] [days]
 
     > ./gen-server-cert.sh example rootCA example.com 2048 365
     > ls example
@@ -28,9 +28,9 @@ Required dependencies:
 Create client keys and certificates using `gen-client-cert.sh`: 
 
 ```
-    Usage: ./gen-client-cert.sh [server directory] [output directory] [client cn] [keysize] [days]
+    Usage: ./gen-client-cert.sh [server directory] [output directory] [client cn] [days]
 
-    > ./gen-client-cert.sh example client01 client01 2048 365
+    > ./gen-client-cert.sh example client01 client01 365
     > ls client01
 
     client01.crt  client01.csr  client01.key  client01-tlsv2.key    

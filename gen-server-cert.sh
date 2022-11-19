@@ -3,7 +3,7 @@
 set -e
 
 if [ $# -le 4 ]; then
-    echo "Usage: $0 [output directory] [ca cn] [server cn] [keysize] [days]"
+    echo "Usage: $0 [output directory] [ca cn] [server cn] [dh keysize] [days]"
     exit 1
 fi
 

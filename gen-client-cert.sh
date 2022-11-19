@@ -2,22 +2,20 @@
 
 set -e
 
-if [ $# -le 4 ]; then
-    echo "Usage: $0 [server directory] [output directory] [client cn] [keysize] [days]"
+if [ $# -le 3 ]; then
+    echo "Usage: $0 [server directory] [output directory] [client cn] [days]"
     exit 1
 fi
 
 IN_DIR=$1
 OUT_DIR=$2
 CLIENT_CN=$3
-KEY_SIZE=$4
-DAYS=$5
+DAYS=$4
 
 mkdir "$OUT_DIR"
 OUT_DIR="$(pwd)/$OUT_DIR"
 
 export KEY_DIR="$IN_DIR"
-export KEY_SIZE=$KEY_SIZE
 export KEY_CN="$CLIENT_CN"
 
 openssl req \
