@@ -21,7 +21,7 @@ export KEY_CN="$CLIENT_CN"
 openssl req \
     -config "openssl.cnf" \
     -batch \
-    -noenc \
+    -nodes \
     -sha384 \
     -new \
     -newkey ec:<(openssl ecparam -name secp384r1) \
