@@ -16,10 +16,16 @@ Required dependencies:
 `gen-server-cert.sh` needs a number of positional arguments:
 
 ```
-    Usage: ./gen-server-cert.sh [output directory] [ca cn] [server cn] [dh keysize] [days]
+    Usage: ./gen-server-cert.sh [options] <ca_cn> <server_cn>
 
-    > ./gen-server-cert.sh example rootCA example.com 2048 365
-    > ls example
+        Options:
+          -k    diffie-hellman parameter and rsa key size, default 2048 bits
+          -l    certificate lifetimes, default 365 days
+          -o    output directory, default <server_cn>
+          -t    key type (rsa, secp256k1 or secp384r1), default secp384r1
+
+    > ./gen-server-cert.sh rootCA example.com
+    > ls example.com
 
     01.pem  ca.crt  ca.key  dh2048.pem  example.com.crt  example.com.csr  example.com.key 
     index.txt  index.txt.attr  index.txt.old  serial  serial.old  server-tlsv2.key  ta.key
@@ -28,12 +34,18 @@ Required dependencies:
 Create client keys and certificates using `gen-client-cert.sh`: 
 
 ```
-    Usage: ./gen-client-cert.sh [server directory] [output directory] [client cn] [days]
+    Usage: ./gen-client-cert.sh [options] <server_directory> <client_cn>
 
-    > ./gen-client-cert.sh example client01 client01 365
+        Options:
+          -k    rsa key size, default 2048 bits
+          -l    certificate lifetimes, default 365 days
+          -o    output directory, default <client_cn>
+          -t    key type (rsa, secp256k1 or secp384r1), default secp384r1
+
+    > ./gen-client-cert.sh example.com client01
     > ls client01
 
-    client01.crt  client01.csr  client01.key  client01-tlsv2.key    
+    ca.crt  client01.crt  client01.csr  client01.key  client01-tlsv2.key    
 ```
 
 See [dotfiles/openvpn/etc/openvpn](https://github.com/gnortt/dotfiles/tree/master/openvpn/etc/openvpn) for compatible OpenVPN server and client configs.
