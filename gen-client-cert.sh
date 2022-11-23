@@ -74,4 +74,5 @@ openvpn \
     --tls-crypt-v2 "$IN_DIR"/server-tlsv2.key \
     --genkey tls-crypt-v2-client "$OUT_DIR/$CLIENT_CN"-tlsv2.key
 
+cp "$IN_DIR/ca.crt" "$OUT_DIR/"
 chmod 0600 "$OUT_DIR"/*.key
