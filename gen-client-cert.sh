@@ -41,7 +41,17 @@ mkdir "$OUT_DIR"
 OUT_DIR="$(pwd)/$OUT_DIR"
 
 export KEY_DIR="$IN_DIR"
+export KEY_SIZE=$KEY_SIZE
 export KEY_CN="$CLIENT_CN"
+
+case "$TYPE" in
+    rsa)    openssl genrsa -out "$OUT_DIR/$CLIENT_CN.key" $KEY_SIZE;;
+    secp384r1|secp256k1) 
+            openssl ecparam -genkey -name $TYPE -noout -out "$OUT_DIR/$CLIENT_CN.key";; 
+    *)
+        echo "Invalid key type: choose one of rsa, secp256k1 or secp384r1";
+        exit 1;;
+esac
 
 openssl req \
     -config "openssl.cnf" \
@@ -49,8 +59,7 @@ openssl req \
     -nodes \
     -sha384 \
     -new \
-    -newkey ec:<(openssl ecparam -name secp384r1) \
-    -keyout "$OUT_DIR/$CLIENT_CN.key" \
+    -key "$OUT_DIR/$CLIENT_CN.key" \
     -out "$OUT_DIR/$CLIENT_CN.csr" \
 
 openssl ca \
