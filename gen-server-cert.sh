@@ -66,6 +66,7 @@ openssl req \
     -batch \
     -nodes \
     -x509 \
+    -utf8 \
     -sha384 \
     -days $DAYS \
     -new \
@@ -79,6 +80,7 @@ openssl req \
     -batch \
     -nodes \
     -extensions server \
+    -utf8 \
     -sha384 \
     -new \
     -key "$OUT_DIR/$SERVER_CN.key" \

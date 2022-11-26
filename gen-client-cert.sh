@@ -57,6 +57,7 @@ openssl req \
     -config "openssl.cnf" \
     -batch \
     -nodes \
+    -utf8 \
     -sha384 \
     -new \
     -key "$OUT_DIR/$CLIENT_CN.key" \
