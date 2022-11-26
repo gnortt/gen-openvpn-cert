@@ -39,8 +39,6 @@ SERVER_CN=$2
 
 mkdir "$OUT_DIR"
 OUT_DIR="$(pwd)/$OUT_DIR"
-
-echo 01 > "$OUT_DIR"/serial
 touch "$OUT_DIR"/index.txt
 
 export KEY_DIR="$OUT_DIR"
@@ -90,6 +88,7 @@ openssl ca \
     -config "openssl.cnf" \
     -batch \
     -notext \
+    -create_serial \
     -extensions server \
     -days $DAYS \
     -in "$OUT_DIR/$SERVER_CN.csr" \
