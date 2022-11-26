@@ -1,27 +1,20 @@
-HOME=.
-
 [ ca ]
-default_ca=CA_default
+default_ca=ca_default
 
-[ CA_default ]
+[ ca_default ]
 dir=$ENV::KEY_DIR
 certs=$dir
-crl_dir=$dir
-database=$dir/index.txt
 new_certs_dir=$dir
+database=$dir/index.txt
 serial=$dir/serial.txt
 certificate=$dir/ca.crt
-serial=$dir/serial
-crl=$dir/crl.pem
 private_key=$dir/ca.key
-x509_extensions=usr_cert
 default_days=365
-default_crl_days=365
 default_md=sha256
 preserve=no
-policy=policy_anything
+policy=policy_default
 
-[ policy_anything ]
+[ policy_default ]
 countryName=optional
 stateOrProvinceName=optional
 localityName=optional
@@ -32,39 +25,26 @@ name=optional
 emailAddress=optional
 
 [ req ]
-default_keyfile=privkey.pem
-distinguished_name=req_distinguished_name
+default_bits=$ENV::KEY_SIZE
+default_keyfile=privkey.key
+distinguished_name=req_dn
 x509_extensions=v3_ca
 string_mask=utf8only
 
-[ req_distinguished_name ]
+[ req_dn ]
 commonName=Common Name
 commonName_max=64
 commonName_default=$ENV::KEY_CN
 
-[ usr_cert ]
-basicConstraints=CA:FALSE
-subjectKeyIdentifier=hash
-authorityKeyIdentifier=keyid,issuer:always
-extendedKeyUsage=clientAuth
-keyUsage=digitalSignature
-
 [ server ]
 basicConstraints=CA:FALSE
-nsCertType=server
 subjectKeyIdentifier=hash
 authorityKeyIdentifier=keyid,issuer:always
 extendedKeyUsage=serverAuth
 keyUsage=digitalSignature,keyEncipherment
-
-[ v3_req ]
-basicConstraints=CA:FALSE
-keyUsage=nonRepudiation,digitalSignature,keyEncipherment
+nsCertType=server
 
 [ v3_ca ]
 basicConstraints=CA:TRUE
 subjectKeyIdentifier=hash
-authorityKeyIdentifier=keyid:always,issuer:always
-
-[ crl_ext ]
 authorityKeyIdentifier=keyid:always,issuer:always
